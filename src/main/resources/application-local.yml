@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/trading
+    username: myuser
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+auth:
+  oauth:
+    providers:
+      google:
+        client-id: 240652747137-s3krn73b2qagrojnftun4cirpipr5pc2.apps.googleusercontent.com
+        client-secret: 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
+        authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+        token-uri: https://oauth2.googleapis.com/token
+        user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+        user-name-attribute: sub
+        scopes:
+          - profile
+          - email
+    enabled: true
+  standard:
+    jwt:
+      secretKey: tostadas
+      accessTokenExpirationTime: 900
+      refreshTokenExpirationTime: 259200
+      expirationGracePeriod: 300
+    authorization-code:
+      query-param: "authorization_code"
+      redirect-uri: "http://localhost:3000/home"
+      ttl: 400
+    routes:
+      enabled: true

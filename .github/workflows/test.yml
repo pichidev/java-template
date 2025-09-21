@@ -1,0 +1,36 @@
+name: Run Tests and Coverage
+
+on:
+    pull_request:
+    push:
+        branches:
+            - main
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup JDK
+              uses: actions/setup-java@v3
+              with:
+                  java-version: '21'
+                  distribution: 'temurin'
+                  cache: 'maven'
+                  server-id: 'github'
+                  server-username: 'GITHUB_ACTOR'
+                  server-password: ${{ secrets.PAC_TOKEN }}
+
+            - name: Build and test with maven
+              run: mvn clean verify
+
+            - name: Add coverage to PR
+              id: jacoco
+              uses: madrapps/jacoco-report@v1.7.2
+              with:
+                paths: |
+                    ${{ github.workspace }}/**/build/reports/jacoco/prodNormalDebugCoverage/prodNormalDebugCoverage.xml,
+                    ${{ github.workspace }}/**/build/reports/jacoco/**/debugCoverage.xml
+                token: ${{ secrets.PAC_TOKEN }}

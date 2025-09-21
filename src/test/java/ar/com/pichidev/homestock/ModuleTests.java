@@ -1,0 +1,22 @@
+package ar.com.pichidev.homestock;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.modulith.core.ApplicationModules;
+import org.springframework.modulith.docs.Documenter;
+
+public class ModuleTests {
+    ApplicationModules modules = ApplicationModules.of(HomestockApplication.class);
+
+    @Test
+    void writeDocumentationSnippets() {
+        new Documenter(modules)
+                .writeModulesAsPlantUml()
+                .writeIndividualModulesAsPlantUml();
+    }
+
+    @Test
+    public void applicationModules() {
+        modules.forEach(System.out::println);
+        modules.verify();
+    }
+}

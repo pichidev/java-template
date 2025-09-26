@@ -1,11 +1,10 @@
 package ar.com.pichidev.homestock.auth.core.service;
 
-import ar.com.pichidev.homestock.auth.core.entity.OAuthProviderId;
+import ar.com.pichidev.homestock.auth.core.entity.OAuthProvider;
 import ar.com.pichidev.homestock.auth.core.exception.InvalidOAuthProviderId;
 import ar.com.pichidev.homestock.auth.core.interfaces.usecase.OAuthLoginStrategy;
 import org.springframework.stereotype.Service;
 
-import java.security.InvalidParameterException;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class OAuthLoginStrategyResolver {
-    private final Map<OAuthProviderId, OAuthLoginStrategy> oauthStrategies;
+    private final Map<OAuthProvider, OAuthLoginStrategy> oauthStrategies;
     private final OAuthLoginStrategy notImplementedOAuthLoginStrategy;
 
     public OAuthLoginStrategyResolver(List<OAuthLoginStrategy> oauthStrategies, OAuthLoginStrategy notImplementedOAuthLoginStrategy) {
@@ -22,7 +21,7 @@ public class OAuthLoginStrategyResolver {
         this.oauthStrategies = toMap(oauthStrategies);
     }
 
-    private Map<OAuthProviderId, OAuthLoginStrategy> toMap(List<OAuthLoginStrategy> strategies){
+    private Map<OAuthProvider, OAuthLoginStrategy> toMap(List<OAuthLoginStrategy> strategies){
         return strategies.stream()
                 .filter(strategy-> strategy.getProviderId() != null)
                 .collect(
@@ -30,12 +29,12 @@ public class OAuthLoginStrategyResolver {
                                 OAuthLoginStrategy::getProviderId,
                                 Function.identity(),
         (existingStrategy,newStrategy) -> newStrategy,
-                                ()->new EnumMap<>(OAuthProviderId.class)
+                                ()->new EnumMap<>(OAuthProvider.class)
                         )
                 );
     }
 
-    public OAuthLoginStrategy resolve(OAuthProviderId providerId) {
+    public OAuthLoginStrategy resolve(OAuthProvider providerId) {
         if(providerId == null){
             throw new InvalidOAuthProviderId();
         }

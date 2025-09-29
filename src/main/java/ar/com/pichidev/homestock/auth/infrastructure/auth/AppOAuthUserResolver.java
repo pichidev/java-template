@@ -1,4 +1,4 @@
-package ar.com.pichidev.homestock.auth.infrastructure;
+package ar.com.pichidev.homestock.auth.infrastructure.auth;
 
 import ar.com.pichidev.homestock.auth.core.entity.OAuthProvider;
 import ar.com.pichidev.homestock.auth.core.entity.UserTokenInformation;

@@ -1,7 +1,10 @@
 package ar.com.pichidev.homestock.auth.core.entity;
 
+import lombok.Builder;
+
 import java.util.UUID;
 
+@Builder
 public record AuthIdentity(
         UUID id,
         OAuthProvider provider,

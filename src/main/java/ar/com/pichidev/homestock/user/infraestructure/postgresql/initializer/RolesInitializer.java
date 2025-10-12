@@ -18,14 +18,12 @@ public class RolesInitializer implements ApplicationRunner {
         this.roleJpaAdapter = roleJpaAdapter;
     }
 
-    //MEJOR REVISAR ESTO
     @Override
     public void run(ApplicationArguments args) throws Exception  {
         for (Roles roleEnum : Roles.values()) {
-            // Si no existe en la DB, lo creamos
             roleJpaAdapter.findByName(roleEnum.name())
                     .orElseGet(() -> {
-                        RoleModel role = new RoleModel(UUID.randomUUID(), roleEnum.name());
+                        RoleModel role = new RoleModel(roleEnum.name());
                         return roleJpaAdapter.save(role);
                     });
         }

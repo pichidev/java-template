@@ -17,7 +17,7 @@ public class AppOAuthUserResolver implements OAuthUserResolver {
 
     @Override
     public TokenPayload resolveUserFromProvider(String provider, Map<String, Object> providerUserInfo) {
-        UserTokenInformation tokenInformation =oAuthLoginOrchestrator.execute(OAuthProvider.valueOf(provider.toUpperCase()), providerUserInfo);
+        UserTokenInformation tokenInformation = oAuthLoginOrchestrator.execute(OAuthProvider.valueOf(provider.toUpperCase()), providerUserInfo);
 
         return new TokenPayload
                 .Builder()

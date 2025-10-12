@@ -3,10 +3,12 @@ package ar.com.pichidev.homestock.auth.core.usecase;
 import ar.com.pichidev.homestock.auth.core.entity.OAuthProvider;
 import ar.com.pichidev.homestock.auth.core.entity.ProviderUserInformation;
 import ar.com.pichidev.homestock.auth.core.interfaces.usecase.OAuthLoginStrategy;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.UUID;
 
+@Component
 public class GoogleOAuthLoginStrategy implements OAuthLoginStrategy {
     @Override
     public OAuthProvider getProviderId() {

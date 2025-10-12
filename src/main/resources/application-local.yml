@@ -1,12 +1,13 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/trading
+    url: jdbc:postgresql://postgres:5432/homestock
     username: myuser
     password: secret
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+    show-sql: true
 auth:
   oauth:
     providers:

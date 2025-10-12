@@ -3,3 +3,11 @@ spring:
     name: homestock
   profiles:
     active: local
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC

@@ -1,4 +1,4 @@
-package ar.com.pichidev.homestock.auth.infrastructure.postgresql.adapters;
+package ar.com.pichidev.homestock.auth.infrastructure.postgresql.adapter;
 
 import ar.com.pichidev.homestock.auth.core.entity.OAuthProvider;
 import ar.com.pichidev.homestock.auth.infrastructure.postgresql.orm.AuthIdentityModel;

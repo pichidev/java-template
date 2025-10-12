@@ -1,6 +1,7 @@
 package ar.com.pichidev.homestock.user.core.usecase;
 
 import ar.com.pichidev.homestock.user.core.entity.User;
+import ar.com.pichidev.homestock.user.core.exception.EmailAlreadyExistException;
 import ar.com.pichidev.homestock.user.core.interfaces.repository.CreateUserRepository;
 import ar.com.pichidev.homestock.user.core.interfaces.repository.GetUserByEmailRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ public class CreateUserUseCase {
 
     public void execute(User user) {
         if(getUserByEmailRepository.execute(user.getEmail()).isEmpty()){
-            throw new
+            throw new EmailAlreadyExistException();
         }
 
         this.createUserRepository.execute(user);

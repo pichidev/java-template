@@ -1,4 +1,4 @@
-package ar.com.pichidev.homestock.common.handler;
+package ar.com.pichidev.homestock.common.rest.handler;
 
 import ar.com.pichidev.homestock.common.exception.ValidationException;
 import ar.com.pichidev.homestock.common.rest.response.ErrorResponse;

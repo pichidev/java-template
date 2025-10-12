@@ -2,7 +2,7 @@ package ar.com.pichidev.homestock.auth.infrastructure.postgresql.repository;
 
 import ar.com.pichidev.homestock.auth.core.entity.AuthIdentity;
 import ar.com.pichidev.homestock.auth.core.interfaces.repository.CreateAuthIdentityRepository;
-import ar.com.pichidev.homestock.auth.infrastructure.postgresql.adapters.AuthIdentityJpaAdapter;
+import ar.com.pichidev.homestock.auth.infrastructure.postgresql.adapter.AuthIdentityJpaAdapter;
 import ar.com.pichidev.homestock.auth.infrastructure.postgresql.orm.AuthIdentityModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

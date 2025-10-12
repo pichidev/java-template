@@ -1,6 +1,6 @@
 package ar.com.pichidev.homestock.auth.infrastructure.auth;
 
-import ar.com.pichidev.homestock.auth.infrastructure.postgresql.adapters.AuthorizationCodeJpaAdapter;
+import ar.com.pichidev.homestock.auth.infrastructure.postgresql.adapter.AuthorizationCodeJpaAdapter;
 import ar.com.pichidev.homestock.auth.infrastructure.postgresql.orm.AuthorizationCodeModel;
 import ar.com.pichidev.piauth.standard.oauth.entity.AuthorizationCode;
 import ar.com.pichidev.piauth.standard.oauth.services.AuthorizationCodeStore;
@@ -18,7 +18,7 @@ public class AuthorizationCodePostgresqlStore implements AuthorizationCodeStore 
                 .userPayload(authorizationCode.userPayload())
                 .expiresAt(authorizationCode.expiresAt())
                 .build();
-    };
+    }
 
     private AuthorizationCode mapToAuthorizationCode(AuthorizationCodeModel authorizationCodeModel) {
         return new AuthorizationCode(

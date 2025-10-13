@@ -13,11 +13,12 @@ public class CreateUserUseCase {
     private final CreateUserRepository createUserRepository;
     private final GetUserByEmailRepository getUserByEmailRepository;
 
-    public void execute(User user) {
+    public User execute(User user) throws EmailAlreadyExistException {
         if(getUserByEmailRepository.execute(user.getEmail()).isEmpty()){
             throw new EmailAlreadyExistException();
         }
 
         this.createUserRepository.execute(user);
+        return user;
     }
 }

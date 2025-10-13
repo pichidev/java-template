@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class GetUserByEmailUseCase {
     private final GetUserByEmailRepository getUserByEmailRepository;
 
-    public User execute(String email) {
+    public User execute(String email) throws UserNotFoundException {
         return getUserByEmailRepository.execute(email).orElseThrow(
                 UserNotFoundException::new
         );

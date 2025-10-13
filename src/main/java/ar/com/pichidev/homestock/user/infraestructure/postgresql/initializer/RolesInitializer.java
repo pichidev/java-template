@@ -19,7 +19,7 @@ public class RolesInitializer implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception  {
+    public void run(ApplicationArguments args) {
         for (Roles roleEnum : Roles.values()) {
             roleJpaAdapter.findByName(roleEnum.name())
                     .orElseGet(() -> {

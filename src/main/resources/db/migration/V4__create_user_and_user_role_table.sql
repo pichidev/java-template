@@ -1,7 +1,7 @@
 CREATE TABLE user_roles
 (
-    role_id INTEGER NOT NULL,
-    user_id UUID    NOT NULL,
+    role_id VARCHAR(255) NOT NULL,
+    user_id UUID         NOT NULL,
     CONSTRAINT pk_user_roles PRIMARY KEY (role_id, user_id)
 );
 
@@ -15,7 +15,7 @@ CREATE TABLE users
 );
 
 ALTER TABLE user_roles
-    ADD CONSTRAINT fk_userol_on_role_model FOREIGN KEY (role_id) REFERENCES roles (id);
+    ADD CONSTRAINT fk_userol_on_role_model FOREIGN KEY (role_id) REFERENCES roles (name);
 
 ALTER TABLE user_roles
     ADD CONSTRAINT fk_userol_on_user_model FOREIGN KEY (user_id) REFERENCES users (id);

@@ -1,8 +1,10 @@
 package ar.com.pichidev.homestock.auth.infrastructure.postgresql.orm;
 
 import ar.com.pichidev.homestock.auth.infrastructure.postgresql.mapper.MapToJsonConverter;
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import java.time.Instant;
 import java.util.Map;
@@ -17,8 +19,8 @@ public class AuthorizationCodeModel {
     @Id
     String value;
 
-    @Column(name = "user_payload",columnDefinition = "jsonb")
-    @Convert(converter = MapToJsonConverter.class)
+    @Column(name = "user_payload")
+    @Type(JsonType.class)
     Map<String, Object> userPayload;
 
     @Column(name = "expires_at")

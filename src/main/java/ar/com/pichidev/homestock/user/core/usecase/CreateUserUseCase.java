@@ -14,7 +14,7 @@ public class CreateUserUseCase {
     private final GetUserByEmailRepository getUserByEmailRepository;
 
     public User execute(User user) throws EmailAlreadyExistException {
-        if(getUserByEmailRepository.execute(user.getEmail()).isEmpty()){
+        if(getUserByEmailRepository.execute(user.getEmail()).isPresent()){
             throw new EmailAlreadyExistException();
         }
 

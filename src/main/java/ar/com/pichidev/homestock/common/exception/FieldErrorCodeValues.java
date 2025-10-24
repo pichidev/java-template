@@ -1,0 +1,11 @@
+package ar.com.pichidev.homestock.common.exception;
+
+public enum FieldErrorCodeValues implements CodeError {
+    INVALID_FIELD,
+    REQUIRED_FIELD,
+    INVALID_FORMAT,
+    VALUE_TOO_LONG,
+    VALUE_TOO_SHORT,
+    OUT_OF_RANGE,
+    DUPLICATE_VALUE
+}

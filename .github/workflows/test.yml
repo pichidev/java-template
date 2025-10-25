@@ -59,7 +59,7 @@ jobs:
         run: mvn -B clean verify -s ${{ github.workspace }}/settings.xml
 
       - name: Upload Report
-        uses: 'actions/upload-artifact@v3'
+        uses: actions/upload-artifact@v5.0.0
         with:
           name: jacoco-report
           path: |

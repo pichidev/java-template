@@ -18,12 +18,41 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
-          server-id: 'github' # <- debe coincidir con el <id> del repo en pom.xml
-          server-username: 'GITHUB_ACTOR'
-          server-password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          key:  $ {{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: ${{ runner.os }}-m2
 
-      - name: Build and test with maven
-        run: mvn --batch-mode clean verify
+      - name: maven-setup
+        uses: whelk-io/maven-settings-xml-action@v22
+        with:
+          repositories: |
+            [
+              { 
+                "id": "github", 
+                "url": "https://maven.pkg.github.com/pichidev/*",
+                "releases": {
+                "enabled": "true"
+                },
+                "snapshots": {
+                  "enabled": "false"
+                }
+              }
+            ]
+          servers: | 
+            [
+              {
+                "id": "github",
+                "username": "${{ secrets.READ_PACKAGES_USER }}",
+                "password": "${{ secrets.READ_PACKAGES_TOKEN }}"
+              }
+            ]
+          output_file: "${{ github.workspace }}/settings.xml"
+
+      - name: Install, Build and test with maven
+        run: mvn -B clean verify -s ${{ github.workspace }}/settings.xml
 
       - name: Add coverage to PR
         id: jacoco

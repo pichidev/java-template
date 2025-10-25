@@ -1,13 +1,15 @@
 spring:
     datasource:
-        url: jdbc:h2:mem:testdb;Mode=Oracle
+        url: jdbc:h2:mem:testdb;Mode=PostgreSQL;DATABASE_TO_UPPER=FALSE;DEFAULT_NULL_ORDERING=HIGH
         username: sa
         password:
         driver-class-name: org.h2.Driver
     jpa:
         database-platform: org.hibernate.dialect.H2Dialect
         hibernate:
-            ddl-auto: create-drop
+            ddl-auto: none
+        properties:
+          hibernate.hbm2ddl.auto: none
 auth:
   oauth:
     providers:

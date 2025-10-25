@@ -1,6 +1,5 @@
 package ar.com.pichidev.homestock.auth.infrastructure.postgresql.orm;
 
-import ar.com.pichidev.homestock.auth.infrastructure.postgresql.mapper.MapToJsonConverter;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +16,7 @@ import java.util.Map;
 @Builder
 public class AuthorizationCodeModel {
     @Id
-    String value;
+    String code;
 
     @Column(name = "user_payload")
     @Type(JsonType.class)

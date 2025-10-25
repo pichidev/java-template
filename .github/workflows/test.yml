@@ -49,8 +49,8 @@ jobs:
             [
               {
                 "id": "github",
-                "username": "${{ secrets.READ_PACKAGES_USER }}",
-                "password": "${{ secrets.READ_PACKAGES_TOKEN }}"
+                "username": "${{ github.GITHUB_ACTOR }}",
+                "password": "${{ secrets.GITHUB_TOKEN }}"
               }
             ]
           output_file: "${{ github.workspace }}/settings.xml"

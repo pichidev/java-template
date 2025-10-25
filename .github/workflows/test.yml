@@ -14,10 +14,10 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5.0.0
 
       - name: Setup JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v5.0.0
         with:
           java-version: '21'
           distribution: 'temurin'
@@ -27,7 +27,6 @@ jobs:
         with:
           key:  $ {{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           path: ~/.m2/repository
-          restore-keys: ${{ runner.os }}-m2
 
       - name: maven-setup
         uses: whelk-io/maven-settings-xml-action@v22

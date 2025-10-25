@@ -34,7 +34,7 @@
     <repositories>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/carrizoaagustin/piauth</url>
+            <url>https://maven.pkg.github.com/pichidev/piauth</url>
         </repository>
     </repositories>
 

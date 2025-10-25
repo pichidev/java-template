@@ -27,5 +27,6 @@ public class UserModel {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", insertable = false, updatable = false)
     )
+    @Builder.Default
     private Set<RoleModel> roles = new HashSet<>();
 }

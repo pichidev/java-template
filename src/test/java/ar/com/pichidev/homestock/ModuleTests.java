@@ -5,7 +5,7 @@ import org.springframework.modulith.core.ApplicationModules;
 import org.springframework.modulith.docs.Documenter;
 
 public class ModuleTests {
-    ApplicationModules modules = ApplicationModules.of(HomestockApplication.class);
+    ApplicationModules modules = ApplicationModules.of(TemplateApplication.class);
 
     @Test
     void writeDocumentationSnippets() {

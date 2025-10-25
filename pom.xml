@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ar.com.pichidev</groupId>
-	<artifactId>homestock</artifactId>
+	<artifactId>template</artifactId>
 	<version>0.0.1</version>
-	<name>homestock</name>
-	<description>homestock</description>
+	<name>template</name>
+	<description>template</description>
 	<url/>
 	<licenses>
 		<license/>

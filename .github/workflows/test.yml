@@ -5,6 +5,9 @@ on:
   push:
     branches: [ main ]
 
+env:
+  MIN_COVERAGE: 80  # <-- variable global
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -71,12 +74,13 @@ jobs:
           paths: |
             ${{ github.workspace }}/**/target/reports/jacoco/jacoco.xml,
           token: ${{ secrets.GITHUB_TOKEN }}
-          min-coverage-overall: 80
-          min-coverage-changed-files: 80
-          title: code coverage report
+          min-coverage-overall: ${{ env.MIN_COVERAGE }}
+          min-coverage-changed-files: ${{ env.MIN_COVERAGE }}
+          title: Code coverage report
       - name: Fail PR if overall coverage is less than 80%
-        if: ${{ steps.jacoco.outputs.coverage-overall < 80 || steps.jacoco.outputs.coverage-changed-files < 80 }}
+        if: ${{ steps.jacoco.outputs.coverage-overall < env.MIN_COVERAGE || steps.jacoco.outputs.coverage-changed-files < env.MIN_COVERAGE }}
         uses: actions/github-script@v8
         with:
           script: |
-            core.setFailed('Coverage is less than 80%!')
+            core.setFailed(`Coverage below minimum threshold of ${process.env.MIN_COVERAGE}%!`)
+

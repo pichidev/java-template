@@ -58,6 +58,14 @@ jobs:
       - name: Install, Build and test with maven
         run: mvn -B clean verify -s ${{ github.workspace }}/settings.xml
 
+      - name: Upload Report
+        uses: 'actions/upload-artifact@v3'
+        with:
+          name: jacoco-report
+          path: |
+            ${{ github.workspace }}/target/reports/jacoco/jacoco.xml
+            ${{ github.workspace }}/target/reports/jacoco/index.html
+
       - name: Add coverage to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.7.2
@@ -65,3 +73,5 @@ jobs:
           paths: |
             ${{ github.workspace }}/**/target/reports/jacoco/jacoco.xml,
           token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 80
+          min-coverage-changed-files: 80

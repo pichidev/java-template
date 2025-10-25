@@ -79,4 +79,4 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            core.setFailed('Overall coverage is less than 80%!')
+            core.setFailed('Coverage is less than 80%!')

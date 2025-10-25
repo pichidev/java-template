@@ -21,8 +21,4 @@ public class CreateUserUseCase {
         this.createUserRepository.execute(user);
         return user;
     }
-
-    public void test() {
-        System.out.println("Test method in CreateUserUseCase");
-    }
 }

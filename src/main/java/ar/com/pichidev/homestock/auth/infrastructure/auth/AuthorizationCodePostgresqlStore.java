@@ -14,7 +14,7 @@ public class AuthorizationCodePostgresqlStore implements AuthorizationCodeStore 
 
     private AuthorizationCodeModel mapToModel(AuthorizationCode authorizationCode) {
         return AuthorizationCodeModel.builder()
-                .value(authorizationCode.value())
+                .code(authorizationCode.value())
                 .userPayload(authorizationCode.userPayload())
                 .expiresAt(authorizationCode.expiresAt())
                 .build();
@@ -22,7 +22,7 @@ public class AuthorizationCodePostgresqlStore implements AuthorizationCodeStore 
 
     private AuthorizationCode mapToAuthorizationCode(AuthorizationCodeModel authorizationCodeModel) {
         return new AuthorizationCode(
-                authorizationCodeModel.getValue(),
+                authorizationCodeModel.getCode(),
                 authorizationCodeModel.getUserPayload(),
                 authorizationCodeModel.getExpiresAt()
         );

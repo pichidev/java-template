@@ -1,19 +1,18 @@
 name: Run Tests and Coverage
 
 on:
-  pull_request:
   push:
     branches: [ main ]
+  pull_request:
 
 env:
-  MIN_COVERAGE: 80  # <-- variable global
+  MIN_COVERAGE: 80
 
 jobs:
   test:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v5.0.0
@@ -24,10 +23,11 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
+
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
-          key:  $ {{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           path: ~/.m2/repository
 
       - name: maven-setup
@@ -38,15 +38,11 @@ jobs:
               { 
                 "id": "github", 
                 "url": "https://maven.pkg.github.com/pichidev/*",
-                "releases": {
-                "enabled": "true"
-                },
-                "snapshots": {
-                  "enabled": "false"
-                }
+                "releases": { "enabled": "true" },
+                "snapshots": { "enabled": "false" }
               }
             ]
-          servers: | 
+          servers: |
             [
               {
                 "id": "github",
@@ -59,7 +55,7 @@ jobs:
       - name: Install, Build and test with maven
         run: mvn -B clean verify -s ${{ github.workspace }}/settings.xml
 
-      - name: Upload Report
+      - name: Upload Jacoco Report
         uses: actions/upload-artifact@v5.0.0
         with:
           name: jacoco-report
@@ -67,20 +63,33 @@ jobs:
             ${{ github.workspace }}/target/reports/jacoco/jacoco.xml
             ${{ github.workspace }}/target/reports/jacoco/index.html
 
+  coverage:
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ github.event_name == 'pull_request' }}
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Download Jacoco Report
+        uses: actions/download-artifact@v5.0.0
+        with:
+          name: jacoco-report
+          path: reports
+
       - name: Add coverage to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.7.2
         with:
-          paths: |
-            ${{ github.workspace }}/**/target/reports/jacoco/jacoco.xml,
+          paths: reports/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: ${{ env.MIN_COVERAGE }}
           min-coverage-changed-files: ${{ env.MIN_COVERAGE }}
           title: Code coverage report
-      - name: Fail PR if overall coverage is less than 80%
+
+      - name: Fail PR if coverage is below threshold
         if: ${{ steps.jacoco.outputs.coverage-overall < env.MIN_COVERAGE || steps.jacoco.outputs.coverage-changed-files < env.MIN_COVERAGE }}
         uses: actions/github-script@v8
         with:
           script: |
             core.setFailed(`Coverage below minimum threshold of ${process.env.MIN_COVERAGE}%!`)
-

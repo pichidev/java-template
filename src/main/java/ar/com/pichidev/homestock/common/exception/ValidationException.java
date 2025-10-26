@@ -16,4 +16,9 @@ public class ValidationException extends RuntimeException {
     public String getCode() {
         return "VALIDATION_ERROR";
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " ValidationException{" + "fieldErrors=" + fieldErrors + '}';
+    }
 }

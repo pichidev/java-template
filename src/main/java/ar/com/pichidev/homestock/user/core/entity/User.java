@@ -35,7 +35,6 @@ public class User {
         if (roles != null) {
             rolesWithUser.addAll(roles);
         }
-        rolesWithUser.add(Roles.USER);
 
         this.roles = rolesWithUser;
     }

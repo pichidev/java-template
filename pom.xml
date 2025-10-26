@@ -186,6 +186,7 @@
                                 <exclude>**/configuration/**</exclude>
                                 <exclude>**/exception/**</exclude>
                                 <exclude>**/interceptor/**</exclude>
+                                <exclude>**/common/rest/response/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>

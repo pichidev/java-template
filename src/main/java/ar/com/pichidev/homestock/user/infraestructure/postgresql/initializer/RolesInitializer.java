@@ -1,6 +1,6 @@
 package ar.com.pichidev.homestock.user.infraestructure.postgresql.initializer;
 
-import ar.com.pichidev.homestock.user.core.entity.Roles;
+import ar.com.pichidev.homestock.common.core.entity.Roles;
 import ar.com.pichidev.homestock.user.infraestructure.postgresql.adapter.RoleJpaAdapter;
 import ar.com.pichidev.homestock.user.infraestructure.postgresql.orm.RoleModel;
 import org.springframework.boot.ApplicationArguments;

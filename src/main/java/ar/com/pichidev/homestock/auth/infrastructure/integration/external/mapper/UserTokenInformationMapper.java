@@ -13,7 +13,7 @@ public class UserTokenInformationMapper {
                 .name(output.getName())
                 .lastname(output.getLastName())
                 .email(output.getEmail())
-                .roles(output.getRoles().toArray(new String[0]))
+                .roles(output.getRoles().stream().map(Enum::name).toArray(String[]::new))
                 .build();
     }
 }

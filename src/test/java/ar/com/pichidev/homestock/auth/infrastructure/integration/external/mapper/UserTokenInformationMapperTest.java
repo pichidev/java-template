@@ -1,6 +1,7 @@
 package ar.com.pichidev.homestock.auth.infrastructure.integration.external.mapper;
 
 import ar.com.pichidev.homestock.auth.core.entity.UserTokenInformation;
+import ar.com.pichidev.homestock.common.core.entity.Roles;
 import ar.com.pichidev.homestock.user.entrypoint.api.dto.output.UserOutputDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class UserTokenInformationMapperTest {
                 .name("John")
                 .lastName("Doe")
                 .email("john@example.com")
-                .roles(Set.of("USER", "ADMIN"))
+                .roles(Set.of(Roles.USER, Roles.ADMIN))
                 .build();
 
         UserTokenInformation result = mapper.fromOutput(output);
@@ -51,7 +52,7 @@ class UserTokenInformationMapperTest {
                 .name("Jane")
                 .lastName("Smith")
                 .email("jane@example.com")
-                .roles(Set.of("USER"))
+                .roles(Set.of(Roles.USER))
                 .build();
 
         UserTokenInformation result = mapper.fromOutput(output);

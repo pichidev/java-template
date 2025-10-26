@@ -3,6 +3,7 @@ package ar.com.pichidev.homestock.auth.infrastructure.integration.external;
 import ar.com.pichidev.homestock.auth.core.entity.AuthUser;
 import ar.com.pichidev.homestock.auth.core.entity.UserTokenInformation;
 import ar.com.pichidev.homestock.auth.infrastructure.integration.external.mapper.UserTokenInformationMapper;
+import ar.com.pichidev.homestock.common.core.entity.Roles;
 import ar.com.pichidev.homestock.user.entrypoint.api.CreateUserApi;
 import ar.com.pichidev.homestock.user.entrypoint.api.dto.input.CreateUserInputDto;
 import ar.com.pichidev.homestock.user.entrypoint.api.dto.output.UserOutputDto;
@@ -46,7 +47,7 @@ class CreateUserExternalServiceTest {
                 .name("John")
                 .lastName("Doe")
                 .email("test@example.com")
-                .roles(Set.of("USER"))
+                .roles(Set.of(Roles.USER))
                 .build();
 
         UserTokenInformation expectedTokenInfo = UserTokenInformation.builder()
@@ -92,7 +93,7 @@ class CreateUserExternalServiceTest {
                 .name("Jane")
                 .lastName("Smith")
                 .email("jane.smith@example.com")
-                .roles(Set.of("USER", "ADMIN"))
+                .roles(Set.of(Roles.USER, Roles.ADMIN))
                 .build();
 
         UserTokenInformation tokenInfo = UserTokenInformation.builder()

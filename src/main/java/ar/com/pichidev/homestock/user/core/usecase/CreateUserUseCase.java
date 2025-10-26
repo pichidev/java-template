@@ -1,6 +1,6 @@
 package ar.com.pichidev.homestock.user.core.usecase;
 
-import ar.com.pichidev.homestock.user.core.entity.Roles;
+import ar.com.pichidev.homestock.common.core.entity.Roles;
 import ar.com.pichidev.homestock.user.core.entity.User;
 import ar.com.pichidev.homestock.user.core.exception.EmailAlreadyExistException;
 import ar.com.pichidev.homestock.user.core.interfaces.repository.CreateUserRepository;

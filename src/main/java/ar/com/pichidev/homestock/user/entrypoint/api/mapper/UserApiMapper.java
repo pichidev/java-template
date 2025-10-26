@@ -19,10 +19,7 @@ public class UserApiMapper {
                 .name(user.getName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
-                .roles(user.getRoles().stream()
-                        .map(Enum::name)
-                        .collect(Collectors.toSet())
-                )
+                .roles(user.getRoles())
                 .build();
     }
 

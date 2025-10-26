@@ -16,7 +16,7 @@ public class User {
     private final String name;
     private final String lastName;
     private final String email;
-    private final Set<Roles> roles;
+    private Set<Roles> roles;
 
     private static final Pattern EMAIL_REGEX = Pattern.compile(
             "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$",
@@ -25,27 +25,56 @@ public class User {
 
     @Builder
     private User(UUID id, String name, String lastName, String email, Set<Roles> roles) {
-        validateFields(name,lastName,email);
         this.id = id != null ? id : UUID.randomUUID();
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-
-        Set<Roles> rolesWithUser = new HashSet<>();
-        if (roles != null) {
-            rolesWithUser.addAll(roles);
-        }
-
-        this.roles = rolesWithUser;
+        this.roles = roles != null ? new HashSet<>(roles) : new HashSet<>();
     }
 
-    private void validateFields(String name, String lastName, String email){
+    public static User createAndValidate(UUID id, String name, String lastName, String email, Set<Roles> roles) {
+        validateFields(name,lastName,email);
+        return User.builder()
+                .id(id)
+                .name(name)
+                .lastName(lastName)
+                .email(email)
+                .roles(roles)
+                .build();
+    }
+
+    public static User createAndValidate(UUID id, String name, String lastName, String email) {
+        validateFields(name,lastName,email);
+        return User.builder()
+                .id(id)
+                .name(name)
+                .lastName(lastName)
+                .email(email)
+                .roles(null)
+                .build();
+    }
+
+    public static User fromPersistence(UUID id, String name, String lastName, String email, Set<Roles> roles) {
+        return User.builder()
+                .id(id)
+                .name(name)
+                .lastName(lastName)
+                .email(email)
+                .roles(roles)
+                .build();
+    }
+
+    public void assignRoles(Set<Roles> newRoles) {
+        if (newRoles != null) {
+            this.roles.addAll(newRoles);
+        }
+    }
+
+    private static void validateFields(String name, String lastName, String email){
          List<FieldError> fieldErrors = new ArrayList<>();
 
         GeneralValidation.validateRequiredField(name,"name").ifPresent(fieldErrors::add);
         GeneralValidation.validateRequiredField(lastName,"lastName").ifPresent(fieldErrors::add);
-        GeneralValidation.validateRequiredField(email,"email").ifPresent(fieldErrors::add);
-        GeneralValidation.validateRequiredField(name,"name").ifPresent(fieldErrors::add);
 
         Optional<FieldError> emailError = GeneralValidation.validateRequiredField(email, "email");
         if (emailError.isPresent()) {

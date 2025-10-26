@@ -23,13 +23,12 @@ public class UserMapper {
                 .map(roleModel -> Roles.valueOf(roleModel.getName().toUpperCase()))
                 .collect(Collectors.toSet());
 
-        return User.builder()
-                .id(model.getId())
-                .name(model.getName())
-                .lastName(model.getLastName())
-                .email(model.getEmail())
-                .roles(domainRoles)
-                .build();
+        return User.fromPersistence(
+                model.getId(),
+                model.getName(),
+                model.getLastName(),
+                model.getEmail(),
+                domainRoles);
     }
 
     public UserModel toModel(User domain) {

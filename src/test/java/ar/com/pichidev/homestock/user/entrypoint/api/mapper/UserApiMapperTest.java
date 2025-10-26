@@ -1,6 +1,6 @@
 package ar.com.pichidev.homestock.user.entrypoint.api.mapper;
 
-import ar.com.pichidev.homestock.user.core.entity.Roles;
+import ar.com.pichidev.homestock.common.core.entity.Roles;
 import ar.com.pichidev.homestock.user.core.entity.User;
 import ar.com.pichidev.homestock.user.entrypoint.api.dto.input.CreateUserInputDto;
 import ar.com.pichidev.homestock.user.entrypoint.api.dto.output.UserOutputDto;
@@ -35,7 +35,7 @@ class UserApiMapperTest {
         assertEquals(user.getName(), result.getName());
         assertEquals(user.getLastName(), result.getLastName());
         assertEquals(user.getEmail(), result.getEmail());
-        assertEquals(Set.of("USER"), result.getRoles());
+        assertEquals(Set.of(Roles.USER), result.getRoles());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package ar.com.pichidev.homestock.user.core.entity;
 
+import ar.com.pichidev.homestock.common.core.entity.Roles;
 import ar.com.pichidev.homestock.common.exception.FieldErrorCodeValues;
 import ar.com.pichidev.homestock.common.exception.ValidationException;
 import org.junit.jupiter.api.Test;

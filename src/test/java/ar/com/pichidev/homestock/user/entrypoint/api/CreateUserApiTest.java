@@ -1,6 +1,7 @@
 
 package ar.com.pichidev.homestock.user.entrypoint.api;
 
+import ar.com.pichidev.homestock.common.core.entity.Roles;
 import ar.com.pichidev.homestock.user.core.entity.User;
 import ar.com.pichidev.homestock.user.core.usecase.CreateUserUseCase;
 import ar.com.pichidev.homestock.user.entrypoint.api.dto.input.CreateUserInputDto;
@@ -48,7 +49,7 @@ class CreateUserApiTest {
                 .name(user.getName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
-                .roles(Set.of("USER"))
+                .roles(Set.of(Roles.USER))
                 .build();
 
         when(userApiMapper.toDomain(dto)).thenReturn(user);

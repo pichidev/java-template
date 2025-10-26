@@ -30,13 +30,13 @@ class CreateUserDbRepositoryIntegrationTest {
     void shouldPersistUserInDatabase() {
         UUID id = UUID.randomUUID();
 
-        User domain = User.builder()
-                .id(id)
-                .name("Agustin")
-                .lastName("Carrizo")
-                .email("agustin@example.com")
-                .roles(Set.of(Roles.USER))
-                .build();
+        User domain = User.createAndValidate(
+                        id,
+                "Agustin",
+                "Carrizo",
+                "agustin@example.com",
+                Set.of(Roles.USER)
+                );
 
         repository.execute(domain);
 
@@ -50,21 +50,21 @@ class CreateUserDbRepositoryIntegrationTest {
 
     @Test
     void shouldThrowRepositoryExceptionWhenEmailIsDuplicated() {
-        User first = User.builder()
-                .id(UUID.randomUUID())
-                .name("Agustin")
-                .lastName("Carrizo")
-                .email("duplicate@example.com")
-                .roles(Set.of(Roles.USER))
-                .build();
+        User first = User.createAndValidate(
+                UUID.randomUUID(),
+                "Agustin",
+                "Carrizo",
+                "duplicate@example.com",
+                Set.of(Roles.USER)
+        );
 
-        User duplicate = User.builder()
-                .id(UUID.randomUUID())
-                .name("Agustin")
-                .lastName("Carrizo")
-                .email("duplicate@example.com")
-                .roles(Set.of(Roles.USER))
-                .build();
+        User duplicate = User.createAndValidate(
+                UUID.randomUUID(),
+                "Agustin",
+                "Carrizo",
+                "duplicate@example.com",
+                Set.of(Roles.USER)
+        );
 
         repository.execute(first);
 

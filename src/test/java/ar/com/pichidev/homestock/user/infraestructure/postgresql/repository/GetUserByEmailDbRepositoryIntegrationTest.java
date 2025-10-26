@@ -41,13 +41,14 @@ class GetUserByEmailDbRepositoryIntegrationTest {
     @Transactional
     void shouldReturnUserWhenEmailExists() {
         UUID id = UUID.randomUUID();
-        User user = User.builder()
-                .id(id)
-                .name("Agustin")
-                .lastName("Carrizo")
-                .email("agustin@example.com")
-                .roles(Set.of(Roles.USER))
-                .build();
+
+        User user = User.createAndValidate(
+                id,
+                "Agustin",
+                "Carrizo",
+                "agustin@example.com",
+                Set.of(Roles.USER)
+        );
 
         createUserRepository.execute(user);
 

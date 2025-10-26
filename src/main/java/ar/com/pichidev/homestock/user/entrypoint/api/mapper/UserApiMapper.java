@@ -31,11 +31,6 @@ public class UserApiMapper {
             throw new IllegalArgumentException("Input cannot be null");
         }
 
-        return User.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .lastName(dto.getLastName())
-                .email(dto.getEmail())
-                .build();
+        return User.createAndValidate(dto.getId(),dto.getName(), dto.getLastName(), dto.getEmail());
     }
 }

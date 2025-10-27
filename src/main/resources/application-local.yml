@@ -12,8 +12,8 @@ auth:
   oauth:
     providers:
       google:
-        client-id: 240652747137-s3krn73b2qagrojnftun4cirpipr5pc2.apps.googleusercontent.com
-        client-secret: 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
+        client-id: client-id
+        client-secret: SECRET
         authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
         token-uri: https://oauth2.googleapis.com/token
         user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo

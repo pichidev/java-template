@@ -43,7 +43,7 @@ This is a Spring Boot 3.5.6 application using Java 21, following **Hexagonal Arc
 
 ### Module Structure
 
-The application is organized into independent modules under `ar.com.pichidev.homestock`:
+The application is organized into independent modules under `ar.com.pichidev.template`:
 
 - **auth** - OAuth authentication module (Google OAuth integration via piauth library)
 - **user** - User management module

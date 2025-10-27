@@ -1,0 +1,16 @@
+package ar.com.pichidev.template;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+@SpringBootTest
+class TemplateApplicationTests {
+
+	@Test
+	void contextLoads() {
+        assertDoesNotThrow(() -> TemplateApplication.main(new String[] {}));
+	}
+
+}
